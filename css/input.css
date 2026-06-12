@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-main: #f5f6f8;
+  --color-sec: #ffffff;
+  --color-border: #e5e7eb;
+  --font-poppins: "Poppins", sans-serif;
+  --font-azeret: "Azeret Mono", monospace;
+}
+
+@layer base {
+  .dark {
+    --color-sec: #2E3031;
+    --color-main: #0A0C0D;
+    --color-border: rgb(77,77,77);
+  }
+}
+
+.rounded-box {
+  @apply rounded-full shadow-md border-[2px] border-border bg-sec font-poppins font-bold items-center justify-between px-[1.5rem]
+}
+
+.btn {
+  @apply transition-all shadow-md h-[3.5rem] aspect-square rounded-full bg-sec border-[2px] border-border active:scale-98 active:brightness-150
+}
+
+.SettingBtn {
+  @apply transition-all shadow-md h-[2.5rem] w-[5rem] p-[0.25rem] border-[2px] border-border rounded-full bg-sec active:scale-[0.96]
+}
+
+.toggle-on {
+  @apply flex flex-row-reverse
+}
+
+.toggle-off {
+  @apply flex
+}
+
+.list {
+  background-image: url('../assets/menu.png');
+  background-size: 60%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.back {
+  background-image: url('../assets/left-arrow.png');
+  background-size: 60%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.setting {
+  background-image: url('../assets/setting.png');
+  background-size: 60%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.dropDown {
+  background-image: url('../assets/arrow-down.png');
+  background-size: 40%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.trashBin {
+  background-image: url('../assets/trash-bin.png');
+  background-size: 85%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.delPopup {
+  @apply fixed top-0 left-0  h-full w-full backdrop-blur-[5px]
+}
+

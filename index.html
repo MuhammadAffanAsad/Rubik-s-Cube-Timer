@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/output.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <title>Cube Timer</title>
+</head>
+<body class="relative bg-main dark:text-white flex flex-col text-[#1e1e1e] m-[1.2rem]">
+  
+  <div id="TimerPage" class="visible">
+  <div class="h-[100dvh]">
+    <div>
+      <!-- DATA MODAL -->
+    	<div class="w-full flex flex-col gap-[0.6rem] mx-auto md:w-[50%]">
+    	  <div class="flex h-[3.5rem] w-full text-[24px] rounded-box">
+    	    <p class="font-poppins text-[24px] font-bold opacity-30">Best Time:</p>
+    	    <p id="bestTimeUI" class="font-poppins text-[24px] font-bold">-</p>
+        </div>
+    	  <div id="AvarageUI" class="flex w-full gap-[0.6rem]">
+    	    <div class="flex h-[2.2rem] w-[50%] text-[16px] rounded-box"><p class="font-poppins text-[16px] font-bold opacity-30">Ao3:</p><p id="avg3UI">-</p></div>
+    	    <div class="flex h-[2.2rem] w-[50%] text-[16px] rounded-box"><p class="font-poppins text-[16px] font-bold opacity-30">Ao5:</p><p id="avg5UI">-</p></div>
+    	  </div>
+    	</div>
+    	
+    	<!-- STOPWATCH STARTER -->
+      <div id="ParentSW" class="absolute touch-none top-0 left-0 w-full h-full">
+        <div id="IdleSW" class="absolute w-full h-full flex"></div>
+        <div id="ReadySW" class="absolute w-full h-full hidden"></div>
+        <div id="EndSW" class="absolute w-full h-full hidden"></div>
+      </div>
+    	
+      <!-- NAV BUTTON -->
+      <div class="relative w-full flex justify-between mt-[0.6rem] mx-auto md:w-[50%]">
+        <div id="typeButton" class="flex shadow-md gap-[0.6rem] h-[2.2rem] w-fit text-[16px] rounded-full border-[2px] border-border bg-sec font-poppins font-bold items-center font-poppins text-[16px] font-bold transition-all active:scale-[0.98] active:brightness-120">
+          <div id="typeDisplay" class="ml-[1.2rem]">-</div>
+          <div class="dropDown dark:invert h-full mr-[0.6rem] aspect-square"></div>
+        </div>
+        <div class="flex gap-[0.6rem]">
+          <div id="ListBtn" class="btn"><div class="list h-full w-full dark:invert"></div></div>
+          <div id="SettingBtn" class="btn"><div class="setting h-full w-full dark:invert"></div></div>
+        </div>
+        <div id="BtnCover" class="absolute w-full h-full hidden"></div>
+      </div>
+    </div>
+    <div>
+      <!-- STOPWATCH MODAL -->
+      <div id="SWmodal" class="mt-[0.6rem] shadow-md select-none h-[100%] text-[48px] aspect-square rounded-full border-[2px] border-border bg-sec font-azeret tabular-nums font-bold items-center justify-around flex md:h-[60vh] md:max-h-[50vw] mx-auto"><p class="select-none">HOLD</p></div>
+      
+      <!-- SCRAMBLE -->
+      <p id="Scramble" class="text-[24px] select-none font-poppins font-bold text-center my-[2rem] tracking-[0.3rem] mx-auto">F R U R U F B L B R F R' U' D' F D</p>
+    </div>
+  </div>
+	</div>
+	
+	
+	
+	
+	
+	
+	<div id="ListPage" class="hidden">
+	  <div class="">
+    	<!-- LIST HEADER -->
+    	<div class="w-full flex items-center md:w-[90%] mx-auto">
+    	   <div class="BackBtn btn"><div class="back h-full w-full dark:invert"></div></div>
+    	   <p class="font-bold -translate-x-[1.75rem] font-poppins text-[24px] mx-auto">Solve History</p>
+    	</div>
+    	
+    	<!-- LIST PARENT -->
+    	<div id="listParent" class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:w-[90%] mx-auto w-full gap-[1.2rem] mt-[2.5rem]"></div>
+    	
+    	<!-- gradient -->
+    	<div class="fixed bg-gradient-to-b from-transparent to-main h-[15%] w-full bottom-0 left-0 pointer-events-none bg-[]"></div>
+    	
+      <!-- empty massage -->
+      <div id="emptyMass" class="top-[35vh] text-center right-1/2 translate-x-1/2 absolute font-poppins font-bold opacity-30 text-[32px]">No solve history yet :)</div>
+	  </div>
+	</div>
+	
+	
+	
+	
+	<div id="SettingPage" class="hidden">
+  <!-- SETTING HEADER -->
+  <div class="w-full flex items-center mb-[2.5rem] md:w-[90%] mx-auto">
+    <div class="BackBtn btn"><div class="back h-full w-full dark:invert"></div></div>
+    <p class="font-bold -translate-x-[1.75rem] font-poppins text-[24px] mx-auto">Settings</p>
+  </div>
+  
+  <!-- SETTING PARAMETERS -->
+  <div class="md:flex gap-[1.2rem] md:w-[90%] mx-auto">
+    <div class="flex md:flex-col md:gap-[1.2rem] mb-[1rem] w-full items-center justify-between">
+      <p class="text-[16px] font-poppins font-bold">Timer While Solving</p>
+      <div id="counter" class="SettingBtn toggle-on">
+        <div class="flex items-center justify-around h-full rounded-full aspect-square text-[10px] font-poppins font-bold text-main/50 dark:bg-white bg-[#1e1e1e]">ON</div>
+      </div>
+    </div>
+    
+    <div class="flex md:flex-col md:gap-[1.2rem] mb-[1rem] w-full items-center justify-between">
+      <p class="text-[16px] font-poppins font-bold">Show Avarage 3 & 5</p>
+      <div id="avarage" class="SettingBtn toggle-on">
+        <div class="flex items-center justify-around h-full rounded-full aspect-square text-[10px] font-poppins font-bold text-main/50 dark:bg-white bg-[#1e1e1e]">ON</div>
+      </div>
+    </div>
+    
+    <div class="flex md:flex-col md:gap-[1.2rem] mb-[1rem] w-full items-center justify-between">
+      <p class="text-[16px] font-poppins font-bold">Random Scramble</p>
+      <div id="scramble" class="SettingBtn toggle-on">
+        <div class="flex items-center justify-around h-full rounded-full aspect-square text-[10px] font-poppins font-bold text-main/50 dark:bg-white bg-[#1e1e1e]">ON</div>
+      </div>
+    </div>
+    
+    <div class="flex md:flex-col md:gap-[1.2rem] mb-[1rem] w-full items-center justify-between">
+      <p class="text-[16px] font-poppins font-bold">Inspection</p>
+      <div id="inspect" class="SettingBtn toggle-on">
+        <div class="flex items-center justify-around h-full rounded-full aspect-square text-[10px] font-poppins font-bold text-main/50 dark:bg-white bg-[#1e1e1e]">ON</div>
+      </div>
+    </div>
+    
+    <div class="flex md:flex-col md:gap-[1.2rem] mb-[1rem] w-full items-center justify-between">
+      <p class="text-[16px] font-poppins font-bold">Inspection Time</p>
+      <input id="inspectTimeUI" type="text" maxlength="5" inputmode="numeric" class="w-[5rem] shadow-md text-[16px] focus:outline-0 text-center font-poppins font-bold p-1.5 h-[2.5rem] flex rounded-2xl focus:ring-2 border-[2px] bg-sec border-border"></input>
+    </div>
+    
+    <div class="flex md:flex-col md:gap-[1.2rem] mb-[1rem] w-full items-center justify-between">
+      <p class="text-[16px] font-poppins font-bold">Dark Mode</p>
+      <div id="dark" class="SettingBtn toggle-on">
+        <div class="flex items-center justify-around h-full rounded-full aspect-square text-[10px] font-poppins font-bold text-main/50 dark:bg-white bg-[#1e1e1e]">ON</div>
+      </div>
+    </div>
+  </div>
+	</div>
+	
+	
+	<div id="delPopup" class="delPopup hidden">
+	  <div class="font-poppins text-[16px] max-w-[30rem] font-bold m-auto w-[80%] bg-white dark:bg-main rounded-2xl p-4 border-[2px] border-border">
+	    <p>Are you sure want to delate this solve history?</p>
+	    <div class="flex w-full gap-4 mt-4">
+	      <div id="noDel" class="flex text-[15px] items-center justify-around h-[2rem] w-1/2 dark:bg-sec bg-[#1e1e1e]/10 rounded-lg transition-all active:scale-[0.98] active:brightness-120">NO</div>
+	      <div id="yesDel" class="flex text-[15px] items-center justify-around h-[2rem] w-1/2 dark:bg-sec bg-[#1e1e1e]/10 rounded-lg transition-all active:scale-[0.98] active:brightness-120">YES</div>
+	    </div>
+	  </div>
+	</div>
+	
+	<div id="typePopup" class="fixed flex flex-col top-0 left-0  h-[100dvh] w-full backdrop-blur-[5px]">
+	  <div class="relative flex flex-col overflow-scroll font-poppins text-[16px] max-w-[30rem] font-bold m-auto w-[80%] dark:bg-main bg-white rounded-2xl py-8 px-6 border-[2px] border-border">
+      <p class="absolute text-[32px] top-0 right-[0.5rem]" onclick="hideTypePopup()">×</p>
+	    <p class="text-[24px] mx-auto mb-[0.6rem]">Select Rubik's Type</p>
+      <div id="typeParent">
+        <div id="2x2x2" class="flex items-center mb-[0.6rem] justify-around text-[16px] h-[2.5rem] w-full dark:bg-sec bg-[#1e1e1e]/10 rounded-lg transition-all active:scale-[0.98] active:brightness-120">2x2x2</div>
+        <div id="3x3x3" class="flex items-center mb-[0.6rem] justify-around text-[16px] h-[2.5rem] w-full dark:bg-sec bg-[#1e1e1e]/10 rounded-lg transition-all active:scale-[0.98] active:brightness-120">3x3x3</div>
+        <div id="4x4x4" class="flex items-center mb-[0.6rem] justify-around text-[16px] h-[2.5rem] w-full dark:bg-sec bg-[#1e1e1e]/10 rounded-lg transition-all active:scale-[0.98] active:brightness-120">4x4x4</div>
+        <div id="5x5x5" class="flex items-center mb-[0.6rem] justify-around text-[16px] h-[2.5rem] w-full dark:bg-sec bg-[#1e1e1e]/10 rounded-lg transition-all active:scale-[0.98] active:brightness-120">5x5x5</div>
+        <div id="6x6x6" class="flex items-center mb-[0.6rem] justify-around text-[16px] h-[2.5rem] w-full dark:bg-sec bg-[#1e1e1e]/10 rounded-lg transition-all active:scale-[0.98] active:brightness-120">6x6x6</div>
+        <div id="7x7x7" class="flex items-center mb-[0.6rem] justify-around text-[16px] h-[2.5rem] w-full dark:bg-sec bg-[#1e1e1e]/10 rounded-lg transition-all active:scale-[0.98] active:brightness-120">7x7x7</div>
+        <div id="pyraminx" class="flex items-center mb-[0.6rem] justify-around text-[16px] h-[2.5rem] w-full dark:bg-sec bg-[#1e1e1e]/10 rounded-lg transition-all active:scale-[0.98] active:brightness-120">Pyraminx</div>
+        <div id="megaminx" class="flex items-center mb-[0.6rem] justify-around text-[16px] h-[2.5rem] w-full dark:bg-sec bg-[#1e1e1e]/10 rounded-lg transition-all active:scale-[0.98] active:brightness-120">Megaminx</div>
+        <div id="skewb" class="flex items-center mb-[0.6rem] justify-around text-[16px] h-[2.5rem] w-full dark:bg-sec bg-[#1e1e1e]/10 rounded-lg transition-all active:scale-[0.98] active:brightness-120">Skewb</div>
+        <div id="square-1" class="flex items-center mb-[0.6rem] justify-around text-[16px] h-[2.5rem] w-full dark:bg-sec bg-[#1e1e1e]/10 rounded-lg transition-all active:scale-[0.98] active:brightness-120">Square-1</div>
+      </div>
+	  </div>
+	</div>
+	
+	<script src="js/index.js"></script>
+</body>
+</html>
+</html>
